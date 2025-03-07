@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>女神节快乐</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            background: #ffe6f2;
+            overflow: hidden;
+        }
+        
+        .container {
+            position: relative;
+            height: 100vh;
+        }
+
+        /* 心跳动画 */
+        .heart {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: heartbeat 1.2s infinite;
+            font-size: 60px;
+            color: #ff3366;
+        }
+
+        /* 文字动画 */
+        .text {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            animation: fadeIn 2s;
+        }
+
+        /* 花瓣动画 */
+        .petal {
+            position: absolute;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: translateX(-50%) scale(1); }
+            15% { transform: translateX(-50%) scale(1.3); }
+            30% { transform: translateX(-50%) scale(1); }
+            45% { transform: translateX(-50%) scale(1.15); }
+            60% { transform: translateX(-50%) scale(1); }
+            100% { transform: translateX(-50%) scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart">❤️</div>
+        
+        <div class="text">
+            <h1 style="color: #ff3366; margin-bottom: 20px;">🌹 女神节快乐 🌹</h1>
+            <p style="color: #993366; font-size: 18px;">
+                愿你眼里总有光芒<br>
+                手里总有鲜花<br>
+                愿你成为自己的太阳<br>
+                节日快乐！❤️
+            </p >
+        </div>
+    </div>
+
+    <script>
+        // 创建花瓣
+        function createPetals() {
+            const types = ['🌸', '💮', '🌺', '🌷'];
+            for(let i = 0; i < 30; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.innerHTML = types[Math.floor(Math.random()*types.length)];
+                petal.style.left = Math.random() * 100 + '%';
+                petal.style.fontSize = (20 + Math.random() * 20) + 'px';
+                petal.style.animationDuration = (5 + Math.random() * 10) + 's';
+                petal.style.animationDelay = Math.random() * 5 + 's';
+                document.body.appendChild(petal);
+            }
+        }
+
+        // 初始化
+        window.onload = function() {
+            createPetals();
+            
+            // 添加点击特效
+            document.addEventListener('click', function(e) {
+                const heart = document.createElement('div');
+                heart.style.position = 'absolute';
+                heart.style.left = e.clientX + 'px';
+                heart.style.top = e.clientY + 'px';
+                heart.style.fontSize = '30px';
+                heart.innerHTML = '❤️';
+                heart.style.animation = 'fadeOut 1s forwards';
+                document.body.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 1000);
+            });
+        }
+    </script>
+</body>
+</html>
